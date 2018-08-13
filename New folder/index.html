@@ -15,7 +15,8 @@
             <form>
                 <h1>TO DO List</h1>
                 <h3> A place to store things you have to!!!!!</h3>
-                <input type="text" placeholder="Filter Your To Do's">
+                <input type="text" placeholder="Filter Your To Do's"ng-model="search">
+
             <ol>
             <!---<li class="container" ng-repeat=" item in list.toDoList">
                    <!--- <p>{{$index+1}} {{item.task}}</p> 
@@ -23,17 +24,17 @@
                     <button class="completed" ng-if="item.completed===false">Complete</button>
                     <i class="fas fa-times"></i>
             </li>-->
-            <li class="container" ng-repeat=" item in list.toDoList"
-                    
-                      ng-class="{'true':item.completed===true,'false':item.completed===false}">
-                    
-                     <button class="completed" ng-if="item.completed===false">Complete</button>
+            <li class="container" ng-repeat="item in list.toDoList | filter : search" 
+                 ng-class="{'true':item.completed===true,'false':item.completed===false}">
+                     <button class="completed" ng-if="item.completed===false" ng-click="list.completeTask($index,item.completed)">Complete</button>
                      {{item.task}} 
-                     <i class="fas fa-times"></i>
+                     <i class="fas fa-times" ng-click="list.removeTask(index)"></i>
              </li>
             </ol>
-            <input type="text" placeholder="Add Your To Do ">
-            <button type="button" id="button2">Add</button>
+            <input type="text" placeholder="Add Your To Do "ng-model="newTask">
+            <button type="button" id="button2" ng-click="list.addTask(newTask)">Add</button>
+        
+
 
             </form>
     </section>
